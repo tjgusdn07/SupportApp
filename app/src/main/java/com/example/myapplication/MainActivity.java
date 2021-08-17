@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private bottom_home_fragment frag1;
     private bottom_event_fragment frag2;
     private bottom_favorite_fragment frag3;
-    private bottom_account_fragment frag4;
+    private bottom_reco_fragment frag4;
     private bottom_setting_fragment frag5;
     private MenuItem top_menu_Search;
     private DrawerLayout drawerLayout;
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     case R.id.action_favorite:
                         setFrag(2);
                         break;
-                    case R.id.action_account:
+                    case R.id.action_reco:
                         setFrag(3);
                         break;
                     case R.id.action_setting:
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         frag1 = new bottom_home_fragment();
         frag2 = new bottom_event_fragment();
         frag3 = new bottom_favorite_fragment();
-        frag4 = new bottom_account_fragment();
+        frag4 = new bottom_reco_fragment();
         frag5 = new bottom_setting_fragment();
         setFrag(0); // 기본 페이지 0
 

@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
 import static android.content.Intent.getIntent;
 
@@ -71,7 +70,7 @@ public class bottom_account_fragment<bottom_favorite_profile_models> extends Fra
     private TextView input_pr;
     private DatabaseReference mDatabase;
 
-    private List<bottom_favorite_profile_model> models = new ArrayList<>();
+    private List<bottom_favorite_profile_model> models= new ArrayList<>();
 
 
     @Nullable
@@ -80,7 +79,7 @@ public class bottom_account_fragment<bottom_favorite_profile_models> extends Fra
         view = inflater.inflate(R.layout.bottom_account_fragment, container, false);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user != null ? user.getUid() : null; // 로그인한 유저 고유 uid
+        String uid = user != null ? user.getUid(): null; // 로그인한 유저 고유 uid
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -98,7 +97,7 @@ public class bottom_account_fragment<bottom_favorite_profile_models> extends Fra
         input_birth_date = view.findViewById(R.id.input_birth_date);
         input_sosock = view.findViewById(R.id.input_sosock);
         imageView = (ImageView) view.findViewById(R.id.bottom_event_fragment_image);
-        bottom_event_fragment_details_save = (Button) view.findViewById(R.id.bottom_event_fragment_details_save);
+        bottom_event_fragment_details_save = (Button)view.findViewById(R.id.bottom_event_fragment_details_save);
         bottom_event_fragment_image_change_profile = (Button) view.findViewById(R.id.bottom_event_fragment_image_change_profile);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
@@ -106,9 +105,8 @@ public class bottom_account_fragment<bottom_favorite_profile_models> extends Fra
         mDatabase.child("target").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                models.clear();
-                ;
-                for (DataSnapshot snapshot : datasnapshot.getChildren()) {
+              models.clear();;
+                for(DataSnapshot snapshot : datasnapshot.getChildren()){
                     bottom_favorite_profile_model bottom_favorite_profile_model = snapshot.getValue(com.example.myapplication.models.bottom_favorite_profile_model.class);
                     models.add(bottom_favorite_profile_model);
                 }
@@ -141,7 +139,7 @@ public class bottom_account_fragment<bottom_favorite_profile_models> extends Fra
                 model.intro = String.valueOf(input_pr.getText());
                 model.sns = String.valueOf(input_SNS.getText());
                 model.team = String.valueOf(input_sosock.getText());
-                model.birth = String.valueOf(input_birth_date.getText());
+                model.birth =String.valueOf(input_birth_date.getText());
                 model.debut = String.valueOf(input_debut_date.getText());
                 model.icon = imagePath;
                 FirebaseDatabase.getInstance().getReference("profile").push().setValue(model);
@@ -149,20 +147,18 @@ public class bottom_account_fragment<bottom_favorite_profile_models> extends Fra
         });
         return view;
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (GET_GALLARY == requestCode && requestCode == RESULT_OK) {
+        if (GET_GALLARY == requestCode) {
             imagePath = getPath(data.getData());
-            File file = new File(imagePath);
+            File file =new File(imagePath);
             imageView.setImageURI(Uri.fromFile(file));
         }
     }
-
-    public String getPath(Uri uri) {
-        String[] proj = {MediaStore.Images.Media.DATA};
-        CursorLoader cursorLoader = new CursorLoader(getActivity(), uri, proj, null, null, null);
+    public String getPath(Uri uri){
+        String [] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader cursorLoader = new CursorLoader(getActivity(), uri,proj, null,null,null);
 
         Cursor cursor = cursorLoader.loadInBackground();
         int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -171,8 +167,7 @@ public class bottom_account_fragment<bottom_favorite_profile_models> extends Fra
 
         return cursor.getString(index);
     }
-
-    private void upload(String uri) {
+    private void upload(String uri){
         StorageReference storageRef = storage.getReferenceFromUrl("gs://supportapp-f34a1.appspot.com");
 
         Uri file = Uri.fromFile(new File(uri));
@@ -193,4 +188,11 @@ public class bottom_account_fragment<bottom_favorite_profile_models> extends Fra
             }
         });
     }
+
+    private class target {
+    }
 }
+
+
+
+

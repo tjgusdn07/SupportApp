@@ -17,6 +17,7 @@ import com.example.myapplication.Live.activities.LiveBroadCastActivity;
 public class bottom_setting_fragment extends Fragment {
     private View view;
     private Button live_button;
+    private Button account_button;
     private Intent intent;
 
     @Nullable
@@ -32,6 +33,17 @@ public class bottom_setting_fragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        account_button = (Button) view.findViewById(R.id.account_button);
+        account_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(getActivity(), accountActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         return view;
     }
 }

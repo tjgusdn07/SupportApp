@@ -113,7 +113,7 @@ public class BoardwriteActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (GET_GALLARY == requestCode && requestCode==RESULT_OK) {
+        if (GET_GALLARY == requestCode) {
             imagePath = getPath(data.getData());
             File file =new File(imagePath);
             imageView.setImageURI(Uri.fromFile(file));

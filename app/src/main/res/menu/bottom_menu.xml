@@ -16,10 +16,10 @@
         android:icon="@drawable/bottom_favorite"
         android:title="favorite"/>
     <item
-        android:id="@+id/action_account"
+        android:id="@+id/action_reco"
         android:enabled="true"
-        android:icon="@drawable/bottom_account"
-        android:title="account"/>
+        android:icon="@drawable/bottom_reco"
+        android:title="reco"/>
     <item
         android:id="@+id/action_setting"
         android:enabled="true"
