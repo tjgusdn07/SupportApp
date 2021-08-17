@@ -1,6 +1,6 @@
 package com.example.myapplication.models;
 
-import android.net.Uri;
+import com.google.firebase.database.DatabaseReference;
 
 public class bottom_favorite_profile_model {
 
@@ -14,7 +14,9 @@ public class bottom_favorite_profile_model {
     public String team;
     public String mCategory;
     public String email;
-    public bottom_favorite_profile_model(){}
+
+    public bottom_favorite_profile_model() {
+    }
 
     public String getmCategory() {
         return mCategory;
@@ -40,10 +42,11 @@ public class bottom_favorite_profile_model {
         this.birth = birth;
     }
 
-    public String  getDebut() { return debut;
+    public String getDebut() {
+        return debut;
     }
 
-    public void setDebut(String  debut) {
+    public void setDebut(String debut) {
         this.debut = debut;
     }
 
@@ -63,7 +66,7 @@ public class bottom_favorite_profile_model {
         this.intro = intro;
     }
 
-    public  String getName() {
+    public String getName() {
         return name;
     }
 

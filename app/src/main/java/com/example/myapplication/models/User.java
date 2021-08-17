@@ -5,12 +5,16 @@ import android.util.StringBuilderPrinter;
 import com.google.android.gms.tasks.Task;
 
 public class User {
+    public String name;
+    public String email;
+    public String photoURL;
+    public String birth;
+    public String team;
+    public String sns;
     private String Uid;
     private String id;
     private String pw;
-    private String name;
-    private String phone;
-    private String photoURL;
+    public String phone;
     private int is_target;  // 0 : 일반, 1 : 후원 대상
     private Boolean is_surveyed;
 
