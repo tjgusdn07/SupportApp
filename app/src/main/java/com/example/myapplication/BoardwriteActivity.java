@@ -51,8 +51,7 @@ public class BoardwriteActivity extends AppCompatActivity {
     private FirebaseStorage storage;
     private FirebaseDatabase database;
     private String imagePath;
-    private ScrollView scroll;
-    private BitmapDrawable bitmap;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +112,7 @@ public class BoardwriteActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (GET_GALLARY == requestCode) {
+        if (GET_GALLARY == requestCode && requestCode == RESULT_OK) {
             imagePath = getPath(data.getData());
             File file =new File(imagePath);
             imageView.setImageURI(Uri.fromFile(file));

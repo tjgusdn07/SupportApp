@@ -11,6 +11,7 @@ public class User {
     public String birth;
     public String team;
     public String sns;
+    public String intro;
     private String Uid;
     private String id;
     private String pw;
@@ -39,6 +40,9 @@ public class User {
         this.phone = phone;
         this.photoURL = photoURL;
         this.is_target = is_target;
+    }
+
+    public static void clear() {
     }
 
     public void setIs_surveyed(Boolean is_surveyed) {
@@ -87,4 +91,6 @@ public class User {
     }
 
 
+    public void add(User user) {
+    }
 }
