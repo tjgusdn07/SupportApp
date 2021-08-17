@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <View
-            android:id="@+id/bottom_event_fragment_top"
+            android:id="@+id/account_top"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="64dp"
@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/bottom_event_fragment_top_text"
+            android:id="@+id/account_top_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -31,23 +31,23 @@
             android:text="계정정보변경"
             android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_event_fragment_top"
+            app:layout_constraintBottom_toTopOf="@+id/account_top"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/bottom_event_fragment_image"
+            android:id="@+id/account_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bottom_event_fragment_top" />
+            app:layout_constraintTop_toBottomOf="@+id/account_top" />
 
         <Button
-            android:id="@+id/bottom_event_fragment_image_change_profile"
+            android:id="@+id/account_image_change_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -55,9 +55,9 @@
             android:text="프로필 사진 바꾸기"
             android:textColor="@color/teal_200"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/bottom_event_fragment_image"
-            app:layout_constraintStart_toStartOf="@+id/bottom_event_fragment_image"
-            app:layout_constraintTop_toBottomOf="@+id/bottom_event_fragment_image" />
+            app:layout_constraintEnd_toEndOf="@+id/account_image"
+            app:layout_constraintStart_toStartOf="@+id/account_image"
+            app:layout_constraintTop_toBottomOf="@+id/account_image" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -69,7 +69,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bottom_event_fragment_image_change_profile">
+            app:layout_constraintTop_toBottomOf="@+id/account_image_change_profile">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -264,7 +264,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/bottom_event_fragment_details_save"
+            android:id="@+id/account_details_save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
