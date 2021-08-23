@@ -5,18 +5,11 @@
       <map>
         <entry key="..\:/Users/pc/Workspace/Android/SupportApp/app/src/main/res/layout/bottom_favorite_fragment.xml" value="0.15032894736842106" />
         <entry key="..\:/Users/pc/Workspace/Android/SupportApp/app/src/main/res/layout/bottom_favorite_profile.xml" value="0.15032894736842106" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_account.xml" value="0.12138157894736842" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/SupportApp/app/src/main/res/layout/activity_account.xml" value="0.1" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_account.xml" value="0.2" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_board_write.xml" value="0.16400277970813065" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SupportApp/app/src/main/res/layout/activity_board_content.xml" value="0.20516304347826086" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SupportApp/app/src/main/res/layout/activity_board_list.xml" value="0.21302083333333333" />
         <entry key="..\:/Users/user/AndroidStudioProjects/SupportApp/app/src/main/res/layout/activity_board_write.xml" value="0.16" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/SupportApp/app/src/main/res/layout/activity_live_room.xml" value="0.1" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/SupportApp/app/src/main/res/layout/activity_news.xml" value="0.1037037037037037" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/SupportApp/app/src/main/res/layout/activity_pay.xml" value="0.1" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/SupportApp/app/src/main/res/layout/activity_profile.xml" value="0.1037037037037037" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/SupportApp/app/src/main/res/layout/bottom_home_viewpager_layout1.xml" value="0.1" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/SupportApp/app/src/main/res/layout/bottom_reco_fragment.xml" value="0.1" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/SupportApp/app/src/main/res/layout/bottom_setting_fragment.xml" value="0.1037037037037037" />
       </map>
     </option>
   </component>

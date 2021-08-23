@@ -1,10 +1,12 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -47,13 +49,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private bottom_reco_fragment frag4;
     private bottom_setting_fragment frag5;
     private MenuItem top_menu_Search;
-    private DrawerLayout drawerLayout;
     private ArrayList<Target> targetList = new ArrayList<>();
     private RecyclerView recyclerview;
     private ArrayList<Subject> subjectList = new ArrayList<>();
     private MainAdapter MainAdapter;
+    private DrawerLayout drawerLayout;
+    private View drawer;
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.top_menu, menu);
@@ -76,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
         return true;
-    }
+    }*/
 
     /*@Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -112,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Log.e("Debug", Utility.INSTANCE.getKeyHash(this));
 
-        //Hooks
+        /*//Hooks
         Toolbar toolbar = findViewById(R.id.toolbar);
         drawerLayout = (DrawerLayout) findViewById(R.id.top_category_layout);
         //NavigationView navigationView = (NavigationView) findViewById(R.id.top_category_view);
@@ -124,7 +127,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Navigation Drawer
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        toggle.syncState();*/
+        drawerLayout = (DrawerLayout) findViewById(R.id.top_category_layout);
+        drawer = (View) findViewById(R.id.category_drawer);
+        ImageButton imageButton = (ImageButton)findViewById(R.id.top_category_click);
+        /*imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(drawer);
+            }
+        });*/
 
         //bottomNavigation
         bottomNavigationView = findViewById(R.id.bottomNavi);
@@ -158,6 +170,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         frag5 = new bottom_setting_fragment();
         setFrag(0); // 기본 페이지 0
 
+        /*ImageButton imageButton = (ImageButton)findViewById(R.id.top_category_click);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(drawer);
+            }
+        });*/
+
+
         //카테고리 recycler
         recyclerview = findViewById(R.id.top_category_view);
         recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -175,14 +196,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         MainAdapter = new MainAdapter(subjectList, MainActivity.this);
                         recyclerview.setAdapter(MainAdapter);
                     }
-
                     @Override
                     public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
                     }
                 });
-
-
         // DB에서 후원대상 불러오기
         FirebaseDatabase.getInstance().getReference("target").orderByChild("name")  // 나중에는 orderbychild 붙여서
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -192,10 +209,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             targetList.add(new Target(dataSnapshot.child("name").getValue().toString()));
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
                     }
                 });
     }

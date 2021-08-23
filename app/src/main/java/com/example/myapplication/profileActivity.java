@@ -3,18 +3,25 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.models.Subject;
+import com.example.myapplication.models.Target;
 import com.example.myapplication.models.bottom_home_data;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,10 +34,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 
-public class profileActivity extends AppCompatActivity {
+public class profileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, adapter2activity {
 
     private static final String TAG = "ProfilePage";
-    private View view;
     private Intent intent;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
@@ -43,6 +49,12 @@ public class profileActivity extends AppCompatActivity {
     private String targetKey;
     private String name;
     private boolean is_liked = false;
+    private ArrayList<Target> targetList = new ArrayList<>();
+    private RecyclerView recyclerview;
+    private ArrayList<Subject> subjectList = new ArrayList<>();
+    private MainAdapter MainAdapter;
+    private DrawerLayout drawerLayout;
+    private View drawer;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +65,51 @@ public class profileActivity extends AppCompatActivity {
 
         intent = getIntent();
         name = intent.getStringExtra("name");
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.top_category_layout_profile);
+        drawer = (View) findViewById(R.id.category_drawer_profile);
+        ImageButton imageButton = (ImageButton)findViewById(R.id.top_category_click_profile);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(drawer);
+            }
+        });
+
+        //카테고리 recycler
+        recyclerview = findViewById(R.id.top_category_view_profile);
+        recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        FirebaseDatabase.getInstance().getReference("Subject").orderByKey()
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        for (DataSnapshot parentSubject : snapshot.getChildren()) {
+                            subjectList.add(new Subject(Subject.HEADER, parentSubject.getKey()));
+
+                            for (DataSnapshot childSubject : parentSubject.getChildren()) {
+                                subjectList.add(new Subject(Subject.CHILD, childSubject.getValue().toString()));
+                            }
+                        }
+                        MainAdapter = new MainAdapter(subjectList,profileActivity.this);
+                        recyclerview.setAdapter(MainAdapter);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                    }
+                });
+        // DB에서 후원대상 불러오기
+        FirebaseDatabase.getInstance().getReference("target").orderByChild("name")  // 나중에는 orderbychild 붙여서
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            targetList.add(new Target(dataSnapshot.child("name").getValue().toString()));
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                    }
+                });
 
 
         TextView textView = findViewById(R.id.profile_top_name);
@@ -197,6 +254,20 @@ public class profileActivity extends AppCompatActivity {
         } else {
             mDatabase.child(uid).child("like").child(name).setValue(null);
         }
+    }
 
+    @Override
+    public void addItem(int type, int position) {
+
+    }
+
+    @Override
+    public void deleteItem(int type, int position) {
+
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
     }
 }

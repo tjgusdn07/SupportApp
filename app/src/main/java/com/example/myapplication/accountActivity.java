@@ -110,7 +110,23 @@ public class accountActivity extends Activity {
                 String name = snapshot.child("name").getValue().toString();
                 String phone_no = snapshot.child("phone").getValue().toString();
                 String birth_date = snapshot.child("birth").getValue().toString();
+                //이미지 받아오기
                 String icon = snapshot.child("photoURL").getValue().toString();
+                File file = new File(icon);
+                String strFileName = file.getName();
+                FirebaseStorage storage = FirebaseStorage.getInstance("gs://supportapp-f34a1.appspot.com");
+                StorageReference storageReference = storage.getReference();
+                storageReference.child("images/" + strFileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Log.d(TAG, "img uri : " + uri);
+                        Glide.with(accountActivity.this).load(uri).into(input_image);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                    }
+                });
                 //String sosock = snapshot.child("sosock").getValue().toString();
                 //String debut_date = snapshot.child("debut_date").getValue().toString();
                 //String SNS = snapshot.child("SNS").getValue().toString();

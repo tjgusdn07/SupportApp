@@ -5,17 +5,12 @@ import android.util.StringBuilderPrinter;
 import com.google.android.gms.tasks.Task;
 
 public class User {
-    public String name;
-    public String email;
-    public String photoURL;
-    public String birth;
-    public String team;
-    public String sns;
-    public String intro;
     private String Uid;
     private String id;
     private String pw;
-    public String phone;
+    private String name;
+    private String phone;
+    private String photoURL;
     private int is_target;  // 0 : 일반, 1 : 후원 대상
     private Boolean is_surveyed;
 
@@ -40,9 +35,6 @@ public class User {
         this.phone = phone;
         this.photoURL = photoURL;
         this.is_target = is_target;
-    }
-
-    public static void clear() {
     }
 
     public void setIs_surveyed(Boolean is_surveyed) {
@@ -91,6 +83,4 @@ public class User {
     }
 
 
-    public void add(User user) {
-    }
 }
