@@ -164,7 +164,7 @@ public class accountActivity extends Activity {
                         String name = input_name.getText().toString();
                         String phone = input_phone_no.getText().toString();
                         String birth = input_birth_date.getText().toString();
-                        upload(imagePath);
+
                         database = FirebaseDatabase.getInstance();
                         databaseReference = database.getReference("Users");
                         databaseReference.child(Uid).child("name").setValue(name);
