@@ -154,7 +154,7 @@ public class accountActivity extends Activity {
                         databaseReference.child(Uid).child("name").setValue(name);
                         databaseReference.child(Uid).child("phone").setValue(phone);
                         databaseReference.child(Uid).child("birth").setValue(birth);
-                        databaseReference.child(Uid).child("phothURL").setValue(imagePath);
+                        databaseReference.child(Uid).child("photoURL").setValue(imagePath);
                         finish();
                     }
                 });
