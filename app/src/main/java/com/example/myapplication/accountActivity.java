@@ -155,8 +155,7 @@ public class accountActivity extends Activity {
             }
 
         });
-        account_details_save.setOnClickListener(new View.OnClickListener() {
-            @Override
+    }
             public void onClick(View v) {
                 account_details_save.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -175,8 +174,6 @@ public class accountActivity extends Activity {
                     }
                 });
             }
-        });
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
