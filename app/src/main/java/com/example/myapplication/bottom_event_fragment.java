@@ -1,10 +1,12 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +38,7 @@ public class bottom_event_fragment extends Fragment {
     private DatabaseReference databaseReference;
     private GridLayoutManager gridLayoutManager;
     private bottom_event_news_adapter bottom_event_news_adapter;
+    private bottom_home_fragment.clickListener frag_clickListener;
 
     @Nullable
     @Override
@@ -50,6 +53,15 @@ public class bottom_event_fragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         arrayList = new ArrayList<>();
+
+        ImageButton imageButton = (ImageButton) view.findViewById(R.id.top_category_click_event);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int num = 1;
+                frag_clickListener.click(num);
+            }
+        });
 
         database = FirebaseDatabase.getInstance();
         Query query = database.getReference("news").orderByChild("time");
@@ -73,6 +85,23 @@ public class bottom_event_fragment extends Fragment {
         bottom_event_news_adapter = new bottom_event_news_adapter(arrayList, getContext());
         recyclerView.setAdapter(bottom_event_news_adapter);
         return view;
+    }
+    public interface clickListener {
+        public void click(int num);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if(context instanceof bottom_home_fragment.clickListener) {
+            frag_clickListener = (bottom_home_fragment.clickListener) context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        frag_clickListener = null;
     }
 }
 

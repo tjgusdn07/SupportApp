@@ -37,7 +37,8 @@ import java.util.ArrayList;
 import com.kakao.sdk.common.util.Utility;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, adapter2activity{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, adapter2activity,
+        bottom_home_fragment.clickListener, bottom_event_fragment.clickListener, bottom_favorite_fragment.clickListener, bottom_reco_fragment.clickListener {
 
     private static final String TAG = "MainPage";
     private BottomNavigationView bottomNavigationView;
@@ -128,16 +129,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();*/
-        drawerLayout = (DrawerLayout) findViewById(R.id.top_category_layout);
-        drawer = (View) findViewById(R.id.category_drawer);
-        ImageButton imageButton = (ImageButton)findViewById(R.id.top_category_click);
-        /*imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.openDrawer(drawer);
-            }
-        });*/
-
         //bottomNavigation
         bottomNavigationView = findViewById(R.id.bottomNavi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -169,15 +160,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         frag4 = new bottom_reco_fragment();
         frag5 = new bottom_setting_fragment();
         setFrag(0); // 기본 페이지 0
-
-        /*ImageButton imageButton = (ImageButton)findViewById(R.id.top_category_click);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.openDrawer(drawer);
-            }
-        });*/
-
 
         //카테고리 recycler
         recyclerview = findViewById(R.id.top_category_view);
@@ -250,5 +232,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void deleteItem(int type, int position) {
 
+    }
+
+    @Override
+    public void click(int num) {
+        if(num == 1) {
+            drawerLayout = (DrawerLayout) findViewById(R.id.top_category_layout);
+            drawer = (View) findViewById(R.id.category_drawer);
+            drawerLayout.openDrawer(drawer);
+        }
     }
 }

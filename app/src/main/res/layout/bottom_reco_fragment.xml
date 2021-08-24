@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/top_category_click"
+        android:id="@+id/top_category_click_reco"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginStart="16dp"

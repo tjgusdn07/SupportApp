@@ -1,10 +1,12 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,6 +39,7 @@ public class bottom_favorite_fragment extends Fragment {
     private GridLayoutManager gridLayoutManager;
     private FirebaseAuth mAuth;
     private ArrayList<String> likeList;
+    private bottom_home_fragment.clickListener frag_clickListener;
 
     @Nullable
     @Override
@@ -72,6 +75,16 @@ public class bottom_favorite_fragment extends Fragment {
 
                     }
                 });
+
+        ImageButton imageButton = (ImageButton) view.findViewById(R.id.top_category_click_favorite);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "버튼작동중");
+                int num = 1;
+                frag_clickListener.click(num);
+            }
+        });
         
         return view;
     }
@@ -103,5 +116,22 @@ public class bottom_favorite_fragment extends Fragment {
 
         bottom_favorite_profile_adapter = new bottom_favorite_adapter(arrayList, getContext());
         recyclerView.setAdapter(bottom_favorite_profile_adapter);
+    }
+    public interface clickListener {
+        public void click(int num);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if(context instanceof bottom_home_fragment.clickListener) {
+            frag_clickListener = (bottom_home_fragment.clickListener) context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        frag_clickListener = null;
     }
 }

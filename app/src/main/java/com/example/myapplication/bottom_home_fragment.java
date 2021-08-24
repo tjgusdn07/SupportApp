@@ -1,18 +1,25 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.myapplication.models.Subject;
+import com.example.myapplication.models.Target;
 import com.example.myapplication.models.bottom_home_data;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -43,6 +50,7 @@ public class bottom_home_fragment extends Fragment {
     private ArrayList<String> recoList;
     private FirebaseAuth mAuth;
 
+    private clickListener frag_clickListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,6 +85,17 @@ public class bottom_home_fragment extends Fragment {
         adapter.addItem(fragment3);
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
+
+        ImageButton imageButton = (ImageButton) view.findViewById(R.id.top_category_click_main);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "버튼작동중");
+                int num = 1;
+                frag_clickListener.click(num);
+            }
+        });
+
 
         // 추천 목록 불러오기
         recoList = new ArrayList<>();
@@ -147,5 +166,23 @@ public class bottom_home_fragment extends Fragment {
 
         bottom_home_adapter = new bottom_home_adapter(arrayList, getContext());
         recyclerView.setAdapter(bottom_home_adapter);
+    }
+
+    public interface clickListener {
+        public void click(int num);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if(context instanceof clickListener) {
+            frag_clickListener = (clickListener) context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        frag_clickListener = null;
     }
 }
