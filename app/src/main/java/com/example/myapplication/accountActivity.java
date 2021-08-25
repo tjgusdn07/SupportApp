@@ -79,6 +79,7 @@ public class accountActivity extends Activity {
     private String imagePath;
     private Button account_image_change_profile;
     private Button account_details_save;
+    private String uri_imagepath;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +113,7 @@ public class accountActivity extends Activity {
                 String birth_date = snapshot.child("birth").getValue().toString();
                 //이미지 받아오기
                 String icon = snapshot.child("photoURL").getValue().toString();
+                uri_imagepath = icon;
                 File file = new File(icon);
                 String strFileName = file.getName();
                 FirebaseStorage storage = FirebaseStorage.getInstance("gs://supportapp-f34a1.appspot.com");
@@ -155,30 +157,34 @@ public class accountActivity extends Activity {
             }
 
         });
-    }
+        account_details_save.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                account_details_save.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String name = input_name.getText().toString();
-                        String phone = input_phone_no.getText().toString();
-                        String birth = input_birth_date.getText().toString();
-                        upload(imagePath);
-                        database = FirebaseDatabase.getInstance();
-                        databaseReference = database.getReference("Users");
-                        databaseReference.child(Uid).child("name").setValue(name);
-                        databaseReference.child(Uid).child("phone").setValue(phone);
-                        databaseReference.child(Uid).child("birth").setValue(birth);
-                        databaseReference.child(Uid).child("photoURL").setValue(imagePath);
-                        finish();
-                    }
-                });
+                String name = input_name.getText().toString();
+                String phone = input_phone_no.getText().toString();
+                String birth = input_birth_date.getText().toString();
+                upload(imagePath);
+                database = FirebaseDatabase.getInstance();
+                databaseReference = database.getReference("Users");
+                databaseReference.child(Uid).child("name").setValue(name);
+                databaseReference.child(Uid).child("phone").setValue(phone);
+                databaseReference.child(Uid).child("birth").setValue(birth);
+                if(imagePath == null) {
+                    databaseReference.child(Uid).child("photoURL").setValue(uri_imagepath);
+                }
+                else
+                    databaseReference.child(Uid).child("photoURL").setValue(imagePath);
+                finish();
+
+
             }
+        });
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (GET_GALLARY == requestCode) {
+        if (GET_GALLARY == requestCode && requestCode == RESULT_OK) {
             imagePath = getPath(data.getData());
             File file = new File(imagePath);
             input_image.setImageURI(Uri.fromFile(file));
@@ -199,8 +205,6 @@ public class accountActivity extends Activity {
 
     private void upload(String uri) {
         StorageReference storageRef = storage.getReferenceFromUrl("gs://supportapp-f34a1.appspot.com");
-
-
         Uri file = Uri.fromFile(new File(uri));
         StorageReference riversRef = storageRef.child("images/" + file.getLastPathSegment());
         UploadTask uploadTask = riversRef.putFile(file);
@@ -215,7 +219,6 @@ public class accountActivity extends Activity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Task<Uri> downloadUrl = taskSnapshot.getStorage().getDownloadUrl();
-
             }
         });
     }
