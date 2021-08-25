@@ -94,24 +94,11 @@
         <com.facebook.login.widget.LoginButton
             android:id="@+id/btn_facebook"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:layout_constraintEnd_toEndOf="@+id/btn_google"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/btn_google"
-            app:layout_constraintTop_toBottomOf="@+id/btn_google" />
-
-        <Button
-            android:id="@+id/btn_twitter"
-            android:layout_width="0dp"
             android:layout_height="32dp"
             android:layout_marginTop="12dp"
-            android:background="@drawable/btn_signin_twitter"
-            android:text="TWITTER LOGIN"
-            android:textColor="@color/colorWhite"
             app:layout_constraintEnd_toEndOf="@+id/btn_google"
             app:layout_constraintStart_toStartOf="@+id/btn_google"
-            app:layout_constraintTop_toBottomOf="@+id/btn_facebook" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_google" />
 
         <Button
             android:id="@+id/btn_kakao"
@@ -120,10 +107,11 @@
             android:layout_marginTop="12dp"
             android:text="KAKAO LOGIN"
             android:textColor="@color/colorWhite"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="@+id/btn_google"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/btn_google"
-            app:layout_constraintTop_toBottomOf="@+id/btn_twitter" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_facebook" />
 
         <Button
             android:id="@+id/btn_naver"
@@ -132,6 +120,7 @@
             android:layout_marginTop="12dp"
             android:text="NAVER LOGIN"
             android:textColor="@color/colorWhite"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="@+id/btn_google"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/btn_google"

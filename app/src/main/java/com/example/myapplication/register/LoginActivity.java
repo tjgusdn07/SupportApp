@@ -53,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button btn_signup;
     private Button btn_google;
     private LoginButton btn_fb;
-    private Button btn_twt;
     private Button btn_login;
     private FirebaseAuth mAuth;
 
@@ -72,7 +71,6 @@ public class LoginActivity extends AppCompatActivity {
         btn_signup = findViewById(R.id.btn_signup);
         btn_google = findViewById(R.id.btn_google);
         btn_fb = findViewById(R.id.btn_facebook);
-        btn_twt = findViewById(R.id.btn_twitter);
         btn_login = findViewById(R.id.btn_login);
 
 
@@ -93,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
         clickBtn(btn_signup);
         btn_google.setOnClickListener(this::clickSNS);
         btn_fb.setOnClickListener(this::clickSNS);
-        btn_twt.setOnClickListener(this::clickSNS);
     }
 
     //임시

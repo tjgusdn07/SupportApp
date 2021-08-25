@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +39,7 @@ public class bottom_reco_fragment extends Fragment {
     private GridLayoutManager gridLayoutManager;
     private FirebaseAuth mAuth;
     private ArrayList<String> likeList;
+    private ArrayList<String> recoList;
     private bottom_home_fragment.clickListener frag_clickListener;
 
     @Nullable
@@ -68,11 +68,31 @@ public class bottom_reco_fragment extends Fragment {
                         for (DataSnapshot child : snapshot.getChildren()) {
                             likeList.add(child.getKey());
                         }
-                        loadLikeTarget();
                     }
 
                     @Override
                     public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+
+        // 추천목록 불러오기
+        recoList = new ArrayList<>();
+        FirebaseDatabase.getInstance().getReference("Users").child(mAuth.getUid()).child("reco")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot child : snapshot.getChildren()) {
+                            recoList.add(child.getKey());
+                        }
+                        for (String liked : likeList) {
+                            recoList.remove(liked);
+                        }
+                        loadRecoTarget();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
                     }
                 });
@@ -90,12 +110,12 @@ public class bottom_reco_fragment extends Fragment {
         return view;
     }
 
-    public void loadLikeTarget() {
+    public void loadRecoTarget() {
         arrayList = new ArrayList<>();
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("target");
-        for (String liked : likeList) {
-            databaseReference.orderByChild("name").equalTo(liked).addListenerForSingleValueEvent(new ValueEventListener() {
+        for (String recoed : recoList) {
+            databaseReference.orderByChild("name").equalTo(recoed).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
