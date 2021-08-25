@@ -160,34 +160,29 @@ public class accountActivity extends Activity {
         account_details_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = input_name.getText().toString();
-                String phone = input_phone_no.getText().toString();
-                String birth = input_birth_date.getText().toString();
-                upload(imagePath);
-                database = FirebaseDatabase.getInstance();
-                databaseReference = database.getReference("Users");
-                databaseReference.child(Uid).child("name").setValue(name);
-                databaseReference.child(Uid).child("phone").setValue(phone);
-                databaseReference.child(Uid).child("birth").setValue(birth);
-                if(imagePath == null) {
-                    databaseReference.child(Uid).child("photoURL").setValue(uri_imagepath);
-                    Log.d(TAG, "uri_imagepath = " + uri_imagepath);
-                }
-                else
-                    databaseReference.child(Uid).child("photoURL").setValue(imagePath);
-                Log.d(TAG, "imagePath = " + imagePath);
-                finish();
+                        String name = input_name.getText().toString();
+                        String phone = input_phone_no.getText().toString();
+                        String birth = input_birth_date.getText().toString();
+                        upload(imagePath);
+                        database = FirebaseDatabase.getInstance();
+                        databaseReference = database.getReference("Users");
+                        databaseReference.child(Uid).child("name").setValue(name);
+                        databaseReference.child(Uid).child("phone").setValue(phone);
+                        databaseReference.child(Uid).child("birth").setValue(birth);
+                        if(imagePath == null) {
+                            databaseReference.child(Uid).child("photoURL").setValue(uri_imagepath);
+                        }
+                        else
+                            databaseReference.child(Uid).child("photoURL").setValue(imagePath);
+                        finish();
+                    }
+                });
             }
-        });
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (GET_GALLARY == requestCode && data!=null) {
-                if (resultCode == RESULT_OK) {
-                } else {
-                }
+        if (GET_GALLARY == requestCode && requestCode == RESULT_OK) {
             imagePath = getPath(data.getData());
             File file = new File(imagePath);
             input_image.setImageURI(Uri.fromFile(file));
@@ -208,8 +203,6 @@ public class accountActivity extends Activity {
 
     private void upload(String uri) {
         StorageReference storageRef = storage.getReferenceFromUrl("gs://supportapp-f34a1.appspot.com");
-
-
         Uri file = Uri.fromFile(new File(uri));
         StorageReference riversRef = storageRef.child("images/" + file.getLastPathSegment());
         UploadTask uploadTask = riversRef.putFile(file);
@@ -224,7 +217,6 @@ public class accountActivity extends Activity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Task<Uri> downloadUrl = taskSnapshot.getStorage().getDownloadUrl();
-
             }
         });
     }

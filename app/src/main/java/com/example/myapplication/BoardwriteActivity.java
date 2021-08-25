@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Switch;
@@ -45,6 +46,7 @@ public class BoardwriteActivity extends AppCompatActivity {
     private TextView et_board_write_contents;
     private Button btn_board_add_photo;
     private Button btn_create_post;
+    private ImageButton btn_board_back;
     private Switch sw_board_type;
     private String target;
     private FirebaseAuth mAuth;
@@ -73,6 +75,7 @@ public class BoardwriteActivity extends AppCompatActivity {
         btn_create_post = findViewById(R.id.btn_create_post);
         sw_board_type = findViewById(R.id.sw_board_type);
         btn_board_add_photo = (Button) findViewById(R.id.btn_board_add_photo);
+        btn_board_back = (ImageButton) findViewById(R.id.board_write_back);
         imageView = (ImageView) findViewById(R.id.imageView);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
@@ -106,6 +109,13 @@ public class BoardwriteActivity extends AppCompatActivity {
                 post.img = imagePath;
                 FirebaseDatabase.getInstance().getReference("target").child(target).child("post").push().setValue(post);
                 setResult(200);
+                finish();
+            }
+        });
+
+        btn_board_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
             }
         });

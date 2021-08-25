@@ -53,7 +53,7 @@
             android:layout_marginTop="10dp"
             android:clickable="true"
             android:text="프로필 사진 바꾸기"
-            android:textColor="@color/teal_200"
+            android:textColor="@color/black"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@+id/account_image"
             app:layout_constraintStart_toStartOf="@+id/account_image"
@@ -267,13 +267,14 @@
             android:id="@+id/account_details_save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
             android:layout_marginBottom="32dp"
             android:text="저장하기"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/linearLayout"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintVertical_bias="0.235" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
