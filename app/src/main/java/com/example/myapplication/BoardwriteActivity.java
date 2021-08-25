@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import static android.content.ContentValues.TAG;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -30,7 +28,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -54,10 +51,8 @@ public class BoardwriteActivity extends AppCompatActivity {
     private FirebaseStorage storage;
     private FirebaseDatabase database;
     private String imagePath;
-    private String Uid;
-    private String is_target;
-    private DatabaseReference databaseReference;
-
+    private ScrollView scroll;
+    private BitmapDrawable bitmap;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +61,7 @@ public class BoardwriteActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
         database = FirebaseDatabase.getInstance();
-        Uid = mAuth.getUid();
-        databaseReference = database.getReference("Users");
+
 
         Intent intent = getIntent();
         target = intent.getStringExtra("DB");
@@ -99,14 +93,10 @@ public class BoardwriteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Post post = new Post();
                 if (sw_board_type.isChecked()) {
-                 {
-                        post.type = "공지";
-                    }
-
+                    post.type = "공지";
                 } else {
                     post.type = "일반";
                 }
-
                 upload(imagePath);
                 post.title = String.valueOf(et_board_write_title.getText());
                 post.username = mAuth.getCurrentUser().getEmail();      // 나중에 닉네임으로 나오게끔
@@ -123,7 +113,7 @@ public class BoardwriteActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (GET_GALLARY == requestCode && requestCode == RESULT_OK) {
+        if (GET_GALLARY == requestCode && data != null) {
             imagePath = getPath(data.getData());
             File file =new File(imagePath);
             imageView.setImageURI(Uri.fromFile(file));

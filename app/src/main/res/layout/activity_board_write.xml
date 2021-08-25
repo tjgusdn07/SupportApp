@@ -62,8 +62,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="380dp"
-        android:layout_height="210dp"
+        android:layout_width="378dp"
+        android:layout_height="240dp"
         android:layout_gravity="center_vertical"
         android:adjustViewBounds="true"
         android:contentDescription="TODO"
@@ -71,14 +71,14 @@
         android:windowSoftInputMode="adjustResize"
         app:layout_constraintBottom_toTopOf="@+id/et_board_write_contents"
         app:layout_constraintTop_toBottomOf="@+id/profile_top_name"
-        app:layout_constraintVertical_bias="0.88"
+        app:layout_constraintVertical_bias="0.939"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp" />
+        tools:layout_editor_absoluteX="18dp" />
 
     <EditText
         android:id="@+id/et_board_write_contents"
-        android:layout_width="380dp"
-        android:layout_height="300dp"
+        android:layout_width="376dp"
+        android:layout_height="249dp"
         android:layout_marginBottom="36dp"
         android:background="@drawable/border_layout"
         android:gravity="top"

@@ -171,12 +171,12 @@ public class accountActivity extends Activity {
                 databaseReference.child(Uid).child("birth").setValue(birth);
                 if(imagePath == null) {
                     databaseReference.child(Uid).child("photoURL").setValue(uri_imagepath);
+                    Log.d(TAG, "uri_imagepath = " + uri_imagepath);
                 }
                 else
                     databaseReference.child(Uid).child("photoURL").setValue(imagePath);
+                Log.d(TAG, "imagePath = " + imagePath);
                 finish();
-
-
             }
         });
     }
@@ -184,7 +184,10 @@ public class accountActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (GET_GALLARY == requestCode && requestCode == RESULT_OK) {
+        if (GET_GALLARY == requestCode && data!=null) {
+                if (resultCode == RESULT_OK) {
+                } else {
+                }
             imagePath = getPath(data.getData());
             File file = new File(imagePath);
             input_image.setImageURI(Uri.fromFile(file));
@@ -205,6 +208,8 @@ public class accountActivity extends Activity {
 
     private void upload(String uri) {
         StorageReference storageRef = storage.getReferenceFromUrl("gs://supportapp-f34a1.appspot.com");
+
+
         Uri file = Uri.fromFile(new File(uri));
         StorageReference riversRef = storageRef.child("images/" + file.getLastPathSegment());
         UploadTask uploadTask = riversRef.putFile(file);
@@ -219,6 +224,7 @@ public class accountActivity extends Activity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Task<Uri> downloadUrl = taskSnapshot.getStorage().getDownloadUrl();
+
             }
         });
     }
