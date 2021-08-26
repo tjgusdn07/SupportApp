@@ -75,7 +75,7 @@ public class BoardwriteActivity extends AppCompatActivity {
         btn_create_post = findViewById(R.id.btn_create_post);
         sw_board_type = findViewById(R.id.sw_board_type);
         btn_board_add_photo = (Button) findViewById(R.id.btn_board_add_photo);
-        btn_board_back = (ImageButton) findViewById(R.id.board_write_back);
+        //btn_board_back = (ImageButton) findViewById(R.id.btn_board_back);
         imageView = (ImageView) findViewById(R.id.imageView);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
@@ -113,12 +113,12 @@ public class BoardwriteActivity extends AppCompatActivity {
             }
         });
 
-        btn_board_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        btn_board_back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
